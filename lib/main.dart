@@ -55,37 +55,65 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        "Welcome to BlindMates!",
-        style: TextStyle(fontSize: 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // Keeps content centered
+        children: [
+          Text(
+            "Welcome to BlindMates!",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Smarter Navigation. Greater Independence",
+            style: TextStyle(fontSize: 18, color: Colors.grey,fontStyle: FontStyle.italic),
+          ),
+        ],
       ),
     );
   }
 }
 
-
 // Device Page
 class DevicePage extends StatelessWidget {
   final List<Map<String, dynamic>> devices = [
-    {'name': 'Device 1', 'battery': 80},
-    {'name': 'Device 2', 'battery': 50},
-    {'name': 'Device 3', 'battery': 30},
+    {'name': 'Device 1', 'battery': 80, 'image': 'assets/images/device1.jpg'},
+    {'name': 'Device 2', 'battery': 50, 'image': ''},
+    {'name': 'Device 3', 'battery': 30, 'image': ''},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Devices')),
-      body: ListView.builder(
-        itemCount: devices.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(devices[index]['name']),
-            subtitle: Text('Battery: ${devices[index]['battery']}%'),
-            trailing: Icon(Icons.battery_full),
-          );
-        },
-      ),
+      appBar: AppBar(title: Text('My Devices')),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: devices.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: CircleAvatar(backgroundImage: AssetImage("assets/images/device1.jpg"),),
+                  title: Text(devices[index]['name']),
+                  subtitle: Text('Battery: ${devices[index]['battery']}%'),
+                  trailing: Icon(Icons.battery_3_bar_rounded),
+                );
+              },
+            ),
+          ),
+          Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              onPressed: () {
+                // Action to be performed when the button is pressed
+              },
+              child: Text('Add New Device'),
+            ),
+          ),
+          )  
+        ],
+        
+      )
+
     );
   }
 }
