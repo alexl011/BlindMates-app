@@ -1,4 +1,4 @@
-# blind_mates
+# BlindMates
 
 A new Flutter project.
 
